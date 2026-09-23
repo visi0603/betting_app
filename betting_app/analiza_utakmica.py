@@ -2,12 +2,9 @@
 import pandas as pd
 import requests
 from datetime import datetime
-
 st.set_page_config(page_title="Football Betting Analiza", page_icon="⚽", layout="centered")
-
 st.title("⚽ Pametna Analiza Utakmica")
 st.write("Dohvat parova s raznovrsnim i uravnoteženim preporukama (1, 2, 1X).")
-
 # Odabir datuma kroz sučelje
 odabrani_datum = st.date_input("Izaberi datum utakmica", datetime.now())
 espn_date = odabrani_datum.strftime("%Y%m%d")
@@ -22,7 +19,7 @@ if st.button("Pokreni analizu parova"):
     try:
         response = requests.get(url, headers=headers, timeout=10)
         if response.status_code != 200:
-            st.error("Greška pri spajanju na bazu podataka.")
+           st.error(response.status_code)
         else:
             data = response.json()
             events = data.get('events', [])
